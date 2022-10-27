@@ -33,15 +33,13 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(view -> {
             Intent gotoHome = new Intent(LoginActivity.this, HomeActivity.class);
-            
             if(etName.getText().toString().isEmpty()) {
-                preferencesHelper.setLogin(true,"John Doe");
+                Toast.makeText(this,"Login Gagal, Nama Wajib Diisi!",Toast.LENGTH_LONG).show();
             } else {
                 preferencesHelper.setLogin(true,etName.getText().toString());
+                startActivity(preferencesHelper.getLogin() != false ? gotoHome : null);
+                Toast.makeText(this,"Berhasil Login",Toast.LENGTH_LONG).show();
             }
-
-            startActivity(preferencesHelper.getLogin() != false ? gotoHome : null);
-            Toast.makeText(this,"Berhasil Login",Toast.LENGTH_LONG).show();
 
         });
 
