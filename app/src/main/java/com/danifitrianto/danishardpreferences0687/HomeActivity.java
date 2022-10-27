@@ -18,7 +18,8 @@ public class HomeActivity extends AppCompatActivity {
 
     PreferencesHelper preferencesHelper;
     private Button btnLogout;
-    private TextView txtSession;
+    private TextView txtSession,tvName;
+    private String isLogin,userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,10 @@ public class HomeActivity extends AppCompatActivity {
         preferencesHelper = PreferencesHelper.getInstance(getApplicationContext());
 
         txtSession = findViewById(R.id.txtSession);
+        tvName = findViewById(R.id.tvName);
+
         txtSession.setText(preferencesHelper.getLogin().toString().toUpperCase());
+        tvName.setText(preferencesHelper.getName());
 
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(view -> {
@@ -38,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 
             logoutConfirmation.setPositiveButton("YA", (dialogInterface, i) -> {
                 try {
-                   preferencesHelper.setLogin(false);
+                   preferencesHelper.setLogin(false,"");
                 } finally {
                    if(preferencesHelper.getLogin() != true) {
                        try {

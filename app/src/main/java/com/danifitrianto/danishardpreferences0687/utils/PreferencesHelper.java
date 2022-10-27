@@ -24,11 +24,16 @@ public class PreferencesHelper {
         return sharedPreferences;
     };
 
-    public void setLogin(Boolean session) {
+    public void setLogin(Boolean session,String name) {
         sharedPreferences.edit().putBoolean("isLogin",session).apply();
+        sharedPreferences.edit().putString("loginName",name).apply();
     }
 
     public Boolean getLogin() {
         return sharedPreferences.getBoolean("isLogin",false);
+    }
+
+    public String getName() {
+        return sharedPreferences.getString("loginName","John Doe");
     }
 }
