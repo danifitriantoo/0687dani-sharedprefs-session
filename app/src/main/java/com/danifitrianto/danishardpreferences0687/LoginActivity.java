@@ -15,7 +15,6 @@ public class LoginActivity extends AppCompatActivity {
 
     PreferencesHelper preferencesHelper;
     private Button btnLogin;
-    private TextView txtSession;
     private EditText etName;
 
     @Override
@@ -27,20 +26,16 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         etName = findViewById(R.id.etName);
-        txtSession = findViewById(R.id.txtSession);
-
-        txtSession.setText(preferencesHelper.getLogin().toString().toUpperCase());
 
         btnLogin.setOnClickListener(view -> {
             Intent gotoHome = new Intent(LoginActivity.this, HomeActivity.class);
             if(etName.getText().toString().isEmpty()) {
                 Toast.makeText(this,"Login Gagal, Nama Wajib Diisi!",Toast.LENGTH_LONG).show();
             } else {
-                preferencesHelper.setLogin(true,etName.getText().toString());
-                startActivity(preferencesHelper.getLogin() != false ? gotoHome : null);
+                preferencesHelper.setLogin(etName.getText().toString());
+                startActivity(preferencesHelper.getLogin().isEmpty() ? null : gotoHome);
                 Toast.makeText(this,"Berhasil Login",Toast.LENGTH_LONG).show();
             }
-
         });
 
     }

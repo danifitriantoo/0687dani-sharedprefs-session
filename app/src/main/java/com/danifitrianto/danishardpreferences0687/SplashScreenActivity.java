@@ -27,8 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             Intent gotoHome = new Intent(
                     SplashScreenActivity.this,HomeActivity.class);
 
-            startActivity(preferencesHelper.getLogin() != true
-                    && preferencesHelper.getName().isEmpty()  ? gotoLogin : gotoHome);
+            startActivity(preferencesHelper.getLogin().isEmpty() ? gotoLogin : gotoHome);
         },splashIntv);
     }
 }

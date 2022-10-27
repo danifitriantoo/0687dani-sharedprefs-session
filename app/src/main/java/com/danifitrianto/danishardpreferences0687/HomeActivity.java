@@ -3,14 +3,9 @@ package com.danifitrianto.danishardpreferences0687;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.danifitrianto.danishardpreferences0687.utils.PreferencesHelper;
 
@@ -18,8 +13,7 @@ public class HomeActivity extends AppCompatActivity {
 
     PreferencesHelper preferencesHelper;
     private Button btnLogout;
-    private TextView txtSession,tvName;
-    private String isLogin,userName;
+    private TextView tvName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +22,8 @@ public class HomeActivity extends AppCompatActivity {
 
         preferencesHelper = PreferencesHelper.getInstance(getApplicationContext());
 
-        txtSession = findViewById(R.id.txtSession);
         tvName = findViewById(R.id.tvName);
-
-        txtSession.setText(preferencesHelper.getLogin().toString().toUpperCase());
-        tvName.setText(preferencesHelper.getName());
+        tvName.setText(preferencesHelper.getLogin());
 
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(view -> {
@@ -42,9 +33,9 @@ public class HomeActivity extends AppCompatActivity {
 
             logoutConfirmation.setPositiveButton("YA", (dialogInterface, i) -> {
                 try {
-                   preferencesHelper.setLogin(false,"");
+                   preferencesHelper.setLogin("");
                 } finally {
-                   if(preferencesHelper.getLogin() != true) {
+                   if(preferencesHelper.getLogin().isEmpty()) {
                        try {
                            Toast.makeText(this,"Berhasil Logout", Toast.LENGTH_LONG).show();
                        } finally {
