@@ -34,6 +34,6 @@ public class PreferencesHelper {
     }
 
     public String getName() {
-        return sharedPreferences.getString("loginName","John Doe");
+        return sharedPreferences.getString("loginName","");
     }
 }
